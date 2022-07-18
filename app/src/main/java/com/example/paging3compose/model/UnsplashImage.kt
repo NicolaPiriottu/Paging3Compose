@@ -1,0 +1,41 @@
+package com.example.paging3compose.model
+
+import androidx.room.Embedded
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import com.example.paging3compose.utils.Constants.UNSPLASH_IMAGE_TABLE
+import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.Serializable
+
+/**
+ * Created by Nicola Luigi Piriottu on 18/07/22.
+ */
+@Entity(tableName = UNSPLASH_IMAGE_TABLE)
+data class UnsplashImage(
+    @PrimaryKey(autoGenerate = false)
+    val id:String,
+    @Embedded
+    val urls:Urls,
+    val likes: Int,
+    @Embedded
+    val user:User
+)
+
+@Serializable
+data class Urls(
+    @SerializedName("regular")
+    val regular:String
+)
+@Serializable
+data class User(
+    @SerializedName("links")
+    @Embedded
+    val userLinks: UserLinks,
+    val username:String
+)
+@Serializable
+data class UserLinks(
+    val html:String
+)
+
+
