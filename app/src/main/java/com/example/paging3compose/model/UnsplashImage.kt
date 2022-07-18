@@ -10,6 +10,8 @@ import kotlinx.serialization.Serializable
 /**
  * Created by Nicola Luigi Piriottu on 18/07/22.
  */
+
+@Serializable
 @Entity(tableName = UNSPLASH_IMAGE_TABLE)
 data class UnsplashImage(
     @PrimaryKey(autoGenerate = false)
