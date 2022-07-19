@@ -30,9 +30,8 @@ data class Urls(
 )
 @Serializable
 data class User(
-    @SerializedName("links")
     @Embedded
-    val userLinks: UserLinks,
+    val links: UserLinks,
     val username:String
 )
 @Serializable

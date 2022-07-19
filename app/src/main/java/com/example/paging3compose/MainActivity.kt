@@ -10,6 +10,8 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.rememberNavController
+import com.example.paging3compose.navigation.SetupNavGraph
 import com.example.paging3compose.ui.theme.Paging3ComposeTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -20,7 +22,8 @@ class MainActivity : ComponentActivity() {
         setContent {
             Paging3ComposeTheme {
                 // A surface container using the 'background' color from the theme
-
+                val navController = rememberNavController()
+                    SetupNavGraph(navController = navController)
             }
         }
     }
