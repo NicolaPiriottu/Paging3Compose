@@ -5,6 +5,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.paging3compose.screens.home.HomeScreen
+import com.example.paging3compose.screens.search.SearchScreen
 
 /**
  * Created by Nicola Luigi Piriottu on 19/07/22.
@@ -18,7 +19,7 @@ fun SetupNavGraph(navController: NavHostController) {
         }
 
         composable(route = Screen.Search.route) {
-           // SearchScreen(navController = navController)
+            SearchScreen(navHostController = navController)
         }
     }
 }

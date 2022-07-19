@@ -19,7 +19,7 @@ import javax.inject.Inject
  * Created by Nicola Luigi Piriottu on 18/07/22.
  */
 @OptIn(ExperimentalPagingApi::class)
-class UnsplashRemoteMediator @Inject constructor(
+class UnsplashRemoteMediator (
     private val unsplashApi: UnsplashApi,
     private val unsplashDatabase: UnsplashDatabase
 ) :

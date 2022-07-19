@@ -5,6 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.example.paging3compose.utils.Constants.UNSPLASH_IMAGE_TABLE
 import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 /**
@@ -25,11 +26,12 @@ data class UnsplashImage(
 
 @Serializable
 data class Urls(
-    @SerializedName("regular")
+    @SerialName("regular")
     val regular:String
 )
 @Serializable
 data class User(
+    @SerialName("links")
     @Embedded
     val links: UserLinks,
     val username:String
