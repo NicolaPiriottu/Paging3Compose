@@ -12,11 +12,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
@@ -28,7 +30,10 @@ import androidx.core.content.ContextCompat.startActivity
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.items
 import coil.annotation.ExperimentalCoilApi
+import coil.compose.AsyncImage
+import coil.compose.rememberAsyncImagePainter
 import coil.compose.rememberImagePainter
+import coil.request.ImageRequest
 import com.example.paging3compose.R
 import com.example.paging3compose.model.UnsplashImage
 import com.example.paging3compose.model.Urls
@@ -55,16 +60,17 @@ fun ListContent(items: LazyPagingItems<UnsplashImage>) {
     }
 }
 
-
-@OptIn(ExperimentalCoilApi::class)
 @Composable
 fun UnsplashItem(unsplashImage: UnsplashImage) {
 
-    val painter = rememberImagePainter(data = unsplashImage.urls.regular) {
-        crossfade(durationMillis = 1000)
-        error(R.drawable.placeholder)
-        placeholder(R.drawable.placeholder)
-    }
+    val painter = rememberAsyncImagePainter(
+        model = ImageRequest.Builder(LocalContext.current)
+            .data(unsplashImage.urls.regular)
+            .crossfade(durationMillis = 1000)
+            .build(),
+        placeholder = painterResource(R.drawable.placeholder),
+        contentScale = ContentScale.Crop
+    )
 
     val context = LocalContext.current
     Box(modifier = Modifier
