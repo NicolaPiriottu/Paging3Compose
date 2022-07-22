@@ -9,6 +9,8 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -40,6 +42,7 @@ import com.example.paging3compose.model.Urls
 import com.example.paging3compose.model.User
 import com.example.paging3compose.model.UserLinks
 import com.example.paging3compose.ui.theme.HeartRed
+import com.example.paging3compose.utils.DialogScreen
 
 /**
  * Created by Nicola Luigi Piriottu on 19/07/22.
@@ -73,13 +76,30 @@ fun UnsplashItem(unsplashImage: UnsplashImage) {
     )
 
     val context = LocalContext.current
+
+    val showDialog = remember { mutableStateOf(false) }
+
+    if (showDialog.value){
+        DialogScreen(
+            showDialog= showDialog.value,
+            titleResId = R.string.app_name,
+            message = "",
+            positiveButtonMessage = R.string.app_name,
+            negativeButtonMessage = R.string.app_name, onPositiveButton = {
+
+            }, onNegativeButton = {
+                showDialog.value = false
+            })
+    }
     Box(modifier = Modifier
         .clickable {
-            val browserIntent = Intent(
+            /*val browserIntent = Intent(
                 Intent.ACTION_VIEW,
                 Uri.parse("https://unsplash.com/@${unsplashImage.user.username}?utm_source=DemoApp&utm_medium=referral")
             )
-            startActivity(context, browserIntent, null)
+            startActivity(context, browserIntent, null)*/
+
+            showDialog.value = true
         }
         .height(300.dp)
         .fillMaxWidth(),
